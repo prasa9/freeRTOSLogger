@@ -4,7 +4,7 @@
   Function    : StartTracingTasks()
   Description : API for kicking off task tracing 
 *******************************************************************************/
-static BOOL StartTracingTasks()(BOOL FirstCallInstance, const char* Cmd)
+static BOOL StartTracingTasks(BOOL FirstCallInstance, const char* Cmd)
   {
   FirstCallInstance = FirstCallInstance;
   Cmd   = Cmd;
