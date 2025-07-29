@@ -1,12 +1,13 @@
-Provides stub functions for when an RTOS is not being used. 
+Provides stub functions for when freeRTOS kernel support for Application layer is not needed.
 
 #include <stdlib.h>
 
-// Stubber macro function for trapping un used parameters of the freeRTOS stubs
+/* Stubber macro function for trapping un used parameters of the freeRTOS stubs */
+       
 #define PARAM_UNUSED(x) {x=x;}
 
 /*********************************************************
-       RTOS CONIFGURATION, SETUP, & STATUS
+      free  RTOS CONIFGURATION, SETUP, & STATUS
 **********************************************************/
 void ConfigureSystemClockForFreeRTOS(uint32 Clock_Hz,
                                  uint32 TickPeriod_us)
@@ -43,55 +44,63 @@ void SetHeapForFreeRtos(byte*   HeapAddr,
   }  
 
 /*********************************************************
-       RTOS CONTROL AND SUPPORT
+       freeRTOS start up / shutdown mechanism
 **********************************************************/
-void StartRtos(void)
+void StartKernel(void)
   {
+         /* Do Nothing */
   }  
 
-void TerminateRtos(void)
+void ShutdownKernel(void)
   {
+         /* Do Nothing */
   }
 
-void RtosInstallInterrupts(void)
+void freeRtosInstallInterrupts(void)
   {
+         /* Do Nothing */
   }
 
-BOOL RtosHasBeenStarted(void)
+BOOL freeRtosHasBeenStarted(void)
   {
   return FALSE;
   }  
 
-void RtosEnterCriticalSection(void)
+void freeRtosEnterCritSection(void)
   {
+         /* Do Nothing */
   }  
 
-void RtosExitCriticalSection(void)
+void freeRtosExitCritSection(void)
   {
+         /* Do Nothing */
   }  
 
-void RtosDisableTasks(void)
+void freeRtosDisableTasks(void)
   {
+         /* Do Nothing */
   }  
 
-void RtosEnableTasks(void)
+void freeRtosEnableTasks(void)
   {
+         /* Do Nothing */
   }  
 
 void RtosInstallDebugCommands(void)
   {
+        /* Do Nothing */
   }
   
 /*********************************************************
-       RtosTasks.c
+       freeRtosTasks.c
 **********************************************************/
 /*********************************************************
-       RTOS TASK SUPPORT
+       FREE RTOS TASK SUPPORT
 **********************************************************/
 void* RtosCreateTask(void (*Task)(void*), 
                      const char* const TaskName, 
-                     void*             TaskParameters, 
-                     uint32           PriorityLevel, 
+                     void*             TaskParam, 
+                     uint32           PrioLevel, 
                      uint32           StackSize)
   {
   PARAM_UNUSED(Task);
@@ -101,114 +110,115 @@ void* RtosCreateTask(void (*Task)(void*),
   return NULL;
   }  
 
-UWORD32 RtosGetLastTimeTaskRun(void)
+uint32 freeRtosGetLastTimeTaskRun(void)
   {
   return 0;
   }  
 
-void RtosTaskDelaySinceLastRun(uint32* LastWakeTime, 
-                               uint32  Delay_us)
+void RtosTaskDelaySinceLastRun(uint32* LastWakeUpTime, 
+                               uint32  Dly_us)
   {
-  PARAM_UNUSED(LastWakeTime);
-  PARAM_UNUSED(Delay_us);
+  PARAM_UNUSED(LastWakeUpTime);
+  PARAM_UNUSED(Dly_us);
   }  
 
-void RtosTaskDelay(uint32 Delay_us)
+void freeRtosTaskDelay(uint32 Dly_us)
   {
-  PARAM_UNUSED(Delay_us);
+  PARAM_UNUSED(Dly_us);
   }  
 
-void RtosTaskYield(void)
+void freeRtosTaskYield(void)
   {
+         /* Do Nothing */
   }  
 
-UWORD32 RtosGetTaskPriority(void* TaskHandle)
+uint32 freeRtosGetTaskPriority(void* Handle)
   {
-  PARAM_UNUSED(TaskHandle);
+  PARAM_UNUSED(Handle);
   return 0;
   }  
 
-void RtosSetTaskPriority(void*   TaskHandle, 
-                         uint32 NewPriority)
+void freeRtosSetTaskPriority(void*   Handle, 
+                         uint32 NewPrio)
   {
-  PARAM_UNUSED(TaskHandle);
-  PARAM_UNUSED(NewPriority);
+  PARAM_UNUSED(Handle);
+  PARAM_UNUSED(NewPrio);
   }  
 
-void RtosSuspendTask(void* TaskHandle)
+void RtosSuspendTask(void* Handle)
   {
-  PARAM_UNUSED(TaskHandle);
+  PARAM_UNUSED(Handle);
   }  
 
-void RtosResumeTask(void* TaskHandle,
+void freeRtosResumeTask(void* Handle,
                     BOOL  CalledFromISR)
   {
-  PARAM_UNUSED(TaskHandle);
+  PARAM_UNUSED(Handle);
   PARAM_UNUSED(CalledFromISR);
   }  
 
-void* RtosGetCurrentTaskHandle(void)
+void* freeRtosGetCurrentHandle(void)
   {
   return NULL;
   }  
 
-const char* RtosGetTaskName(void* TaskHandle)
+const char* freeRtosGetTaskName(void* Handle)
   {
-  PARAM_UNUSED(TaskHandle);
+  PARAM_UNUSED(Handle);
   return "NO RTOS INSTALLED";
   }  
 
-tRtosTaskState RtosGetTaskState(void* TaskHandle)
+tRtosTaskState freeRtosGetTaskState(void* Handle)
   {
-  PARAM_UNUSED(TaskHandle);
-  return eRtosTaskReady;
+  PARAM_UNUSED(Handle);
+  return eRtosTaskRdy;
   }  
 
 /*********************************************************
-       RtosSempahores.c
+       free Rtos Sempahores management
 **********************************************************/
 void* RtosCreateBinarySemaphore(const char* Name)
   {
   return NULL;
   }  
 
-void* RtosCreateCountingSemaphore(uint32 MaxCount, const char* Name)
+void* freeRtosCreateCountingSemaphore(uint32 MaxCnt, const char* Name)
   {
-  PARAM_UNUSED(MaxCount);
+  PARAM_UNUSED(MaxCnt);
   return NULL;
   }  
 
-void RtosReleaseSemaphore(void* Handle, 
+void freeRtosReleaseSemaphore(void* Handle, 
                           BOOL  CalledFromISR)
   {
   PARAM_UNUSED(Handle);
   PARAM_UNUSED(CalledFromInterruptRoutine);
   }  
 
-BOOL RtosTakeSemaphore(void*   Handle, 
-                       uint32 BlockTime_us, 
+BOOL freeRtosTakeSemaphore(void*   Handle, 
+                       uint32 Blocked_us, 
                        BOOL    CalledFromISR)
   {
   PARAM_UNUSED(Handle);
-  PARAM_UNUSED(BlockTime_us);
+  PARAM_UNUSED(Blocked_us);
   PARAM_UNUSED(CalledFromISR);
   return TRUE;
   }  
 
-void* RtosCreateMutex(const char* Name)
+void* freeRtosCreateMutex(const char* Name)
   {
   return NULL;
   }  
 
-void RtosReleaseMutex(void* Handle, 
+void freeRtosReleaseMutex(void* Handle, 
                       BOOL  CalledFromISR)
   {
   PARAM_UNUSED(Handle);
   PARAM_UNUSED(CalledFromISR);
   }  
 
-BOOL RtosTakeMutex(void*   Handle, 
-                   uint32 BlockTime_us, 
+BOOL freeRtosTakeMutex(void*   Handle, 
+                   uint32 Blocked_us, 
                    BOOL    CalledFromISR)
   {
   PARAM_UNUSED(Handle);
@@ -217,53 +227,53 @@ BOOL RtosTakeMutex(void*   Handle,
   return TRUE;
   }  
 
-void* RtosCreateRecursiveMutex(const char* Name)
+void* freeRtosCreateRecursiveMutex(const char* Name)
   {
   return NULL;
   }  
 
-void RtosReleaseRecursiveMutex(void* Handle)
+void freeRtosReleaseRecursiveMutex(void* Handle)
   {
   PARAM_UNUSED(Handle);
   }  
 
-BOOL RtosTakeRecursiveMutex(void*   Handle, 
-                            uint32 BlockTime_us)
+BOOL freeRtosTakeRecursiveMutex(void*   Handle, 
+                            uint32 Blocked_us)
   {
   PARAM_UNUSED(Handle);
-  PARAM_UNUSED(BlockTime_us);
+  PARAM_UNUSED(Blocked_us);
   return TRUE;
   }  
 
 /*********************************************************
-       RtosQueue.c
+       free Rtos message Queue management
 **********************************************************/
 /*********************************************************
-       RTOS QUEUES
+       FreeRTOS QUEUESAPI
 **********************************************************/
-void* RtosCreateQueue(const char* Name, 
-                      uint32     QueueLength, 
+void* freeRtosCreateQueue(const char* Name, 
+                      uint32     Length, 
                       uint32     ItemSize)
   {
   PARAM_UNUSED(Name);
-  PARAM_UNUSED(QueueLength);
+  PARAM_UNUSED(Length);
   PARAM_UNUSED(ItemSize);
   return NULL;
   }  
                         
-BOOL RtosQueueSend(void*   QueueHandle, 
+BOOL freeRtosQueueSend(void*   Handle, 
                    void*   Data, 
                    uint32 MaxWaitTime_us, 
                    BOOL    CalledFromISR)
   {
-  PARAM_UNUSED(QueueHandle);
+  PARAM_UNUSED(Handle);
   PARAM_UNUSED(Data);
   PARAM_UNUSED(MaxWaitTime_us);
   PARAM_UNUSED(CalledFromISR);
   return FALSE;
   }  
 
-BOOL RtosQueueSendToFront(void*   QueueHandle, 
+BOOL freeRtosQueuePrioSendToHead(void*   Handle, 
                           void*   Data, 
                           uint32 MaxWaitTime_us, 
                           BOOL    CalledFromISR)
@@ -275,74 +285,74 @@ BOOL RtosQueueSendToFront(void*   QueueHandle,
   return FALSE;
   }  
 
-BOOL RtosQueueRead(void*   QueueHandle, 
+BOOL freeRtosQueueRead(void*   Handle, 
                    void*   Data, 
                    uint32 MaxWaitTime_us, 
                    BOOL    CalledFromInterruptRoutine)
   {
-  PARAM_UNUSED(QueueHandle);
+  PARAM_UNUSED(Handle);
   PARAM_UNUSED(Data);
   PARAM_UNUSED(MaxWaitTime_us);
   PARAM_UNUSED(CalledFromISR);
   return FALSE;
   }  
 
-BOOL RtosQueuePeek(void*   QueueHandle, 
+BOOL freeRtosPeekQueue(void*   Handle, 
                    void*   Data, 
                    uint32 MaxWaitTime_us, 
                    BOOL CalledFromISR)
   {
-  PARAM_UNUSED(QueueHandle);
+  PARAM_UNUSED(Handle);
   PARAM_UNUSED(Data);
   PARAM_UNUSED(MaxWaitTime_us);
   PARAM_UNUSED(CalledFromISR);
   return FALSE;
   }  
 
-BOOL RtosQueueIsFull(void* QueueHandle, 
+BOOL freeRtosQueueFullCheck(void* Handle, 
                      BOOL  CalledFromISR)
   {
-  PARAM_UNUSED(QueueHandle);
+  PARAM_UNUSED(Handle);
   PARAM_UNUSED(CalledFromISR);
   return TRUE;
   }  
 
-BOOL RtosQueueIsEmpty(void* QueueHandle,
+BOOL freeRtosQueueIsEmpty(void* Handle,
                       BOOL  CalledFromISR)
   {
-  PARAM_UNUSED(QueueHandle);
+  PARAM_UNUSED(Handle);
   PARAM_UNUSED(CalledFromISR);
   return FALSE;
   }  
 
-UWORD32 RtosNumberOfMessagesInQueue(void* QueueHandle, 
+uint32 freeRtosCountNumberOfQueueMsg(void* Handle, 
                                     BOOL  CalledFromISR)
   {
-  PARAM_UNUSED(QueueHandle);
+  PARAM_UNUSED(Handle);
   PARAM_UNUSED(CalledFromISR);
   return 0;
   }  
 
 
 /*********************************************************
-       RtosTimers.c
+       freeRtosTimers API
 **********************************************************/
 /*********************************************************
-       RTOS TIMERS
+       freeRTOS TIMERS management
 **********************************************************/
-void* RtosCreateTimer(const char* Name, 
+void* freeRtosCreateTimer(const char* Name, 
                       uint32     Period_us, 
-                      BOOL        AutoReload, 
-                      void        (*TimerCallback)(void* Name))
+                      BOOL        Reload, // autoreload
+                      void        (*TimerHook)(void* Name))
   {
   PARAM_UNUSED(Name);
   PARAM_UNUSED(Period_us);
-  PARAM_UNUSED(AutoReload);
-  PARAM_UNUSED(TimerCallback);
+  PARAM_UNUSED(Reload);
+  PARAM_UNUSED(TimerHook);
   return NULL;
   }  
 
-BOOL RtosStartTimer(void*   Handle,
+BOOL freeRtosStartTimer(void*   Handle,
                     uint32 BlockTime_us,
                     BOOL    CalledFromInterruptRoutine)
   {
@@ -352,7 +362,7 @@ BOOL RtosStartTimer(void*   Handle,
   return FALSE;
   }  
 
-BOOL RtosStopTimer(void*   Handle,
+BOOL freeRtosStopTimer(void*   Handle,
                    uint32 BlockTime_us,
                    BOOL    CalledFromISR)
   {
@@ -362,7 +372,7 @@ BOOL RtosStopTimer(void*   Handle,
   return FALSE;
   }  
 
-BOOL RtosChangeTimerPeriod(void*   Handle, 
+BOOL freeRtosChangeTimerPeriod(void*   Handle, 
                            uint32 NewPeriod_us,
                            uint32 BlockTime_us,
                            BOOL    CalledFromInterruptRoutine)
@@ -374,8 +384,8 @@ BOOL RtosChangeTimerPeriod(void*   Handle,
   return FALSE;
   }  
 
-BOOL RtosTimerReset(void*   Handle,
-                    UWORD32 BlockTime_us,
+BOOL freeRtosTimerReset(void*   Handle,
+                    uint32 BlockTime_us,
                     BOOL    CalledFromISR)
   {
   PARAM_UNUSED(Handle);
@@ -384,16 +394,16 @@ BOOL RtosTimerReset(void*   Handle,
   return FALSE;
   }  
 
-BOOL RtosTimerIsRunning(void* Handle)
+BOOL freeRtosTimerIsRunning(void* Handle)
   {
   PARAM_UNUSED(Handle);
   return FALSE;
   }  
 
-const char* RtosGetTimerName(void* Handle)
+const char* freeRtosGetTimerName(void* Handle)
   {
   PARAM_UNUSED(Handle);
-  return "FREE RTOS IS  NOT INSTALLED YET";
+  return "FREE RTOS IS  NOT started up yet ";
   }  
 
 
