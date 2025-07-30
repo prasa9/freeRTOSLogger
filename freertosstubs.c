@@ -86,7 +86,7 @@ void freeRtosEnableTasks(void)
          /* Do Nothing */
   }  
 
-void RtosInstallDebugCommands(void)
+void freeRtosInstallDebugCommands(void)
   {
         /* Do Nothing */
   }
@@ -97,7 +97,7 @@ void RtosInstallDebugCommands(void)
 /*********************************************************
        FREE RTOS TASK SUPPORT
 **********************************************************/
-void* RtosCreateTask(void (*Task)(void*), 
+void* freeRtosCreateTask(void (*Task)(void*), 
                      const char* const TaskName, 
                      void*             TaskParam, 
                      uint32           PrioLevel, 
@@ -115,7 +115,7 @@ uint32 freeRtosGetLastTimeTaskRun(void)
   return 0;
   }  
 
-void RtosTaskDelaySinceLastRun(uint32* LastWakeUpTime, 
+void freeRtosTaskDelaySinceLastRun(uint32* LastWakeUpTime, 
                                uint32  Dly_us)
   {
   PARAM_UNUSED(LastWakeUpTime);
@@ -145,7 +145,7 @@ void freeRtosSetTaskPriority(void*   Handle,
   PARAM_UNUSED(NewPrio);
   }  
 
-void RtosSuspendTask(void* Handle)
+void freeRtosSuspendTask(void* Handle)
   {
   PARAM_UNUSED(Handle);
   }  
@@ -177,7 +177,7 @@ tRtosTaskState freeRtosGetTaskState(void* Handle)
 /*********************************************************
        free Rtos Sempahores management
 **********************************************************/
-void* RtosCreateBinarySemaphore(const char* Name)
+void* freeRtosCreateBinarySemaphore(const char* Name)
   {
   return NULL;
   }  
