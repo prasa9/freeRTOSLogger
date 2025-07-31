@@ -39,15 +39,15 @@ static BOOL DumpfreertosTaskList(BOOL FirstInstance, const char* Command)
   Cmd   = Cmd;
   
   NrOfTasks = uxTaskGetNumberOfTasks();
-  if (NrOfTasks > MAX_NR_OF_TASKS)
+  if (NrOfTasks > MAX_NR_OF_FREERTOS_TASKS)
     {
     printf("\r\n Display only the first %d tasks out of %d", 
-           MAX_NR_OF_TASKS,
+           MAX_NR_OF_FREERTOS_TASKS,
            NrOfTasks);
     }
   
   uxTaskGetSystemState(TaskDbg,
-                       MAX_NR_OF_TASKS,
+                       MAX_NR_OF_FREERTOS_TASKS,
                        (uint32_t*)&TotalRunningTicks_us);
 
   tick_us = (float)GetfreeRtosClockTick_us() / 1000000.0;
