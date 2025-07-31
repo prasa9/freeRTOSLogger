@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAX_NUMBER_OF_TASKS     10
+#define MAX_NR_OF_FREERTOS_TASKS     10
 
 /* Module Statics */
 static char DisplayTaskCmd[] = "FREERTOS_INFO";
