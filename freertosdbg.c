@@ -78,9 +78,9 @@ static BOOL DumpfreertosTaskList(BOOL FirstInstance, const char* Command)
   Function    : StartTracingTasks()
   Description : API for kicking off task tracing 
 *******************************************************************************/
-static BOOL StartTracingTasks(BOOL FirstCallInstance, const char* Cmd)
+static BOOL StartTracingTasks(BOOL FirstInstance, const char* Cmd)
   {
-  FirstCallInstance = FirstCallInstance;
+  FirstInstance = FirstInstance;
   Cmd   = Cmd;
   
   StartTaskTracing();
@@ -92,14 +92,14 @@ static BOOL StartTracingTasks(BOOL FirstCallInstance, const char* Cmd)
   Function    : StartTracingTasks()
   Description : dump traces of Task
 *******************************************************************************/
-static BOOL DumpTrace(BOOL FirstCallInstance, const char* Cmd)
+static BOOL DumpTrace(BOOL FirstInstance, const char* Cmd)
   {
   BOOL MoreDataToArrive;
   char TraceBuff[256];
   
   Command = Command;
   
-  MoreDataToArrive = RtosGetTraceInfo(FirstCallInstance, TraceBuff, sizeof(TraceBuff));
+  MoreDataToArrive = freeRtosGetTraceInfo(FirstInstance, TraceBuff, sizeof(TraceBuff));
   printf(TraceBuff);
 
   return MoreDataToArrive ;
@@ -114,17 +114,17 @@ void InstallDebugAction(void)
   /*  install functions to display trace information for example see below */
   /* in second argument of helper functions below called, invoke hooks by function pointers */
 
-  AddCommandToDebugList(DisplayTaskCmd,
+  AddCommandToTraceDebugList(DisplayTaskCmd,
                                     DumpRtosTaskList,
                                     DisplayTaskInformation,
                                     FALSE);
                                     
-  AddCommandToDebugList(TraceStartCmd,
+  AddCommandToTraceDebugList(TraceStartCmd,
                                     StartTracingTasks,
                                     TraceStartInformation,
                                     FALSE);
 
-  AdCommandTdoDebugList(TraceDumpCmd,
+  AddCommandToTraceDebugList(TraceDumpCmd,
                                     DumpTrace,
                                     TraceDumpInformation,
                                     FALSE);
