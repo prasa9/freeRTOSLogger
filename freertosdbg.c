@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAX_NR_OF_FREERTOS_TASKS     10
+#define MAX_NR_OF_FREERTOS_TASKS     5
 
 /* Module Statics */
 static char DisplayTaskCmd[] = "FREERTOS_INFO";
@@ -32,8 +32,8 @@ static BOOL DumpfreertosTaskList(BOOL FirstInstance, const char* Command)
   uint32 TotalRunningTicks_us;
   int     NrOfTasks;
   
-  float   tick_us;   // free rtos tick in us
-  float   time_s;  // time in secs
+  float   tick_us;   // free rtos tick in microseconds
+  float   time_s;  // time in seconds
 
   FirstInstance = FirstInstance;
   Cmd   = Cmd;
